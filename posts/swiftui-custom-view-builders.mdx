@@ -1,0 +1,69 @@
+---
+title: Using SwiftUI custom view builders
+description: 'Using SwiftUI custom view builders'
+date: Mar 17 2023
+---
+
+SwiftUI custom view builders are a powerful way to create reusable view components in your app. By encapsulating complex view hierarchy and behaviors into a single view builder, you can make your code more modular and easier to read.
+
+To create a custom view builder, you define a struct or class that conforms to the `View` protocol and has a `@ViewBuilder` property wrapper. The `@ViewBuilder` property wrapper allows you to use a closure to define the contents of your view.
+
+Inside the closure, you can use `if` statements, `for` loops, and other control flow statements to conditionally add or remove subviews. You can also use `@ViewBuilder` recursively to create nested views.
+
+Once you've defined your custom view builder, you can use it just like any other SwiftUI view. You can pass it data using `@State`, `@Binding`, or other property wrappers and use it in a `List`, `NavigationView`, or any other container view.
+
+By using SwiftUI custom view builders, you can create reusable and modular views that make your code more organized and easier to work with.
+
+Let's look at an example of how to create a custom view builder.
+
+Suppose you want to create a view that displays a list of items with a header and footer. You could define a custom view builder like this:
+
+```swift
+struct ItemListView<TextContent: View, ListContent: View>: View {
+    var header: () -> TextContent
+    var footer: () -> TextContent
+    var content: () -> ListContent
+
+    var body: some View {
+        VStack {
+            header()
+            content()
+            footer()
+        }
+    }
+}
+
+extension ItemListView {
+    init(header: @escaping () -> TextContent,
+         footer: @escaping () -> TextContent,
+         @ViewBuilder content: @escaping () -> ListContent) {
+        self.header = header
+        self.footer = footer
+        self.content = content
+    }
+}
+
+```
+
+In this example, `ItemListView` takes three closure parameters: `header`, `footer`, and `content`, all of which return a view. `TextContent` and `ListContent` are custom generic parameters that conform to the `View` protocol. There need to be two different views as there are two different views returned: Text and List.
+
+Inside the `body` property, the `ItemListView` displays the header, content, and footer in a vertical stack using `VStack`.
+
+To use `ItemListView`, you can create an instance of it and pass in the header, footer, and content views as closures:
+
+```swift
+ItemListView(header: {
+                Text("Header")
+            }, footer: {
+                Text("Footer")
+            }) {
+                List(items) { item in
+                    Text(item)
+                }
+            }
+
+```
+
+In this example, `items` is an array of items to display in the content view. The `List` view displays each item in a row using `Text`.
+
+By using a custom view builder like `ItemListView`, you can easily create views with complex hierarchies and behaviors that can be reused throughout your app.

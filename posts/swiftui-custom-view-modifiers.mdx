@@ -1,0 +1,89 @@
+---
+title: Using SwiftUI custom view modifiers
+description: 'SwiftUI custom view modifiers'
+date: Mar 18 2023
+---
+
+SwiftUI is a powerful framework for developing modern and intuitive user interfaces for iOS, macOS, watchOS, and tvOS applications. One of the most significant advantages of SwiftUI is its flexibility in creating custom view modifiers that help developers save time and effort in creating UI components.
+
+View modifiers are reusable pieces of code that can be applied to any SwiftUI view. They allow developers to modify the behavior or appearance of views in a declarative and composable manner. In this blog post, we will discuss how to use custom view modifiers in SwiftUI to create reusable and customizable UI components.
+
+# Creating Custom View Modifiers
+
+Creating custom view modifiers in SwiftUI is straightforward. A custom view modifier is a function that takes a view as an input and returns a modified view as an output. For example, let's create a custom view modifier that adds a red border to any view.
+
+```swift
+
+struct RedBorder: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .border(Color.red, width: 1)
+    }
+}
+
+```
+
+In the code above, we created a new struct called **`RedBorder`** that conforms to the **`ViewModifier`** protocol. The **`ViewModifier`** protocol has a single method called **`body`**, which takes a view as an input and returns a modified view.
+
+In our **`RedBorder`** modifier, we simply add a red border with a width of 1 to the input view. We use the **`.border`** modifier, which is a built-in modifier in SwiftUI that adds a border to any view.
+
+# Using Custom View Modifiers
+
+Once we've created our custom view modifier, we can use it in any SwiftUI view. To use our **`RedBorder`** modifier, we simply apply it to any view using the **`.modifier`** modifier.
+
+```swift
+
+struct ContentView: View {
+    var body: some View {
+        Text("Hello, World!")
+            .modifier(RedBorder())
+    }
+}
+
+```
+
+In the code above, we applied our **`RedBorder`** modifier to a **`Text`** view. The **`.modifier`** modifier takes an instance of a custom view modifier as its input and applies it to the view.
+
+# Customizing View Modifiers
+
+Custom view modifiers can also accept parameters, which allows us to customize their behavior. Let's modify our **`RedBorder`** modifier to accept a color parameter.
+
+```swift
+
+struct ColoredBorder: ViewModifier {
+    let color: Color
+
+    func body(content: Content) -> some View {
+        content
+            .border(color, width: 1)
+    }
+}
+
+```
+
+In the code above, we created a new struct called **`ColoredBorder`** that accepts a **`color`** parameter of type **`Color`**. We use this color parameter to set the color of the border.
+
+We can now use our **`ColoredBorder`** modifier with different colors.
+
+```swift
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Text("Hello, World!")
+                .modifier(ColoredBorder(color: .red))
+
+            Image(systemName: "star.fill")
+                .font(.largeTitle)
+                .modifier(ColoredBorder(color: .blue))
+        }
+    }
+}
+
+```
+
+In the code above, we applied our **`ColoredBorder`** modifier to a **`Text`** view and an **`Image`** view with different colors.
+
+# Conclusion
+
+Custom view modifiers are a powerful feature of SwiftUI that allow developers to create reusable and customizable UI components. By creating custom view modifiers, we can save time and effort in developing UI components and improve the overall readability and maintainability of our code.
