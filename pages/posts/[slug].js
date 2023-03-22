@@ -47,6 +47,11 @@ export default function PostPage({
           <h1 className="text-3xl md:text-5xl dark:text-white text-center mb-12">
             {frontMatter.title}
           </h1>
+          {frontMatter.tags?.map((tag) => (
+            <span className="inline-block bg-gray-200 dark:bg-gray-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-200 mr-2 mb-2">
+              {tag}
+            </span>
+          ))}
           {frontMatter.description && (
             <p className="text-xl mb-4">{frontMatter.description}</p>
           )}
