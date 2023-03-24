@@ -1,0 +1,57 @@
+---
+title: ChatGPT Plugins
+description: 'Alpha rollout for ChatGPT Plugins'
+date: Mar 23 2023
+tags: [ChatGPT, Plugins]
+---
+
+This looks to be slower rollout. Many of the features here are alpha. We’re hearing the announcement of the product as it’s being developed.
+
+[https://openai.com/blog/chatgpt-plugins][2]
+
+Natural language prompts are used to interact with installed plugins. A key understanding is that you don’t tell it to use the plugin, it uses the intent from your prompt to determine that.
+
+## Demos
+
+### Plugins Demo
+
+The plugins demo shows three plugins being installed, then a single prompt which calls each service independently. The plugins are Wolfram Alpha, Instacart and Open Table. All are installed from the Plugin Store. The prompt is to suggest a restaurant, suggest a recipe and calculate calories, then order the ingredients with Instacart.
+
+### Browsing Demo
+
+This shows a web search based on comparison data about the Oscars. The search is broken down into steps. The progress of each step is shown. Then the chat output is displayed, with web references. The response with references is a key step forward.  
+This is powered by Bing search API and makes requests with user-agent `ChatGPT-User` and observes `robots.txt`.
+
+### Code Interpreter Demo
+
+Technically spins up a virtual Python machine for the duration of the chat. It can be used to create and execute Python code. As it is currently limited to Python, so it can ONLY do ALL the things that Python can do.
+
+## Developing a Chat GPT Plugin
+
+Any API can be added as a Chat GPT Plugin.
+
+By providing an OpenAPI specification as part of a manifest. This could be your standard API implementation. Or it could be a customised API implementation for chat appropriate tasks.
+
+You can then install your plugin as a Developer plugin, and run it as an Unverified plugin as a user.
+
+### Progress
+
+It’s going to be quicker and easier to deploy an API with a ChatGPT Plugin as the interface than it is to write a web or mobile app.
+
+## Content Fortress
+
+### Walled Content
+
+OpenAI has been criticised for using openly available data from the Internet to train its models, without any citation or reference to the sources. With the use of user-agent and robots.txt, OpenAI is being considerate that its software does not access content where permission has been blocked. It is possible to for a third party to prevent ChatGPT accessing to your web content.
+
+### Gated Content
+
+Using ChatGPT Plugins a third party can open access to their content via API.
+
+## Summary
+
+- Another rapid advancement development from OpenAI.
+- The inclusion of third parties in the announcement suggests this has not been developed in secret. Interesting that no Microsoft properties were included as third parties (unless Expedia counts).
+- The alpha label indicates they are not rushing to release.
+
+[2]: https://openai.com/blog/chatgpt-plugins
