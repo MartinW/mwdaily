@@ -5,6 +5,19 @@ date: Mar 21 2023
 tags: [ChatGPT, Security, Mainstream]
 ---
 
+Updated: 25 Mar 2023
+
+OpenAI followed up with a [full incident report](https://openai.com/blog/march-20-chatgpt-outage).
+
+- Bug was discovered in the open-source library, Asyncio redis-py client for Redis Cluster.
+- allowed some users to see titles from another active user’s chat history.
+- also possible that the first message of a newly-created conversation was visible in someone else’s chat history if both users were active around the same time.
+- unintentional visibility of payment-related information of 1.2% of the ChatGPT Plus subscribers who were active during a specific nine-hour window.
+  - it was possible for some users to see another active user’s first and last name, email address, payment address, the last four digits (only) of a credit card number, and credit card expiration date.
+  - Complex scenario in which payment details could have been seen.
+
+Original: 21 Mar 2023
+
 OpenAI CEO Sam Altman said the company feels "awful", but the "significant" error had now been fixed. [BBC][2]
 
 “We had a significant issue in ChatGPT due to a bug in an open source library, for which a fix has now been released and we have just finished validating,”
